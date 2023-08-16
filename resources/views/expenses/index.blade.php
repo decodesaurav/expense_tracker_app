@@ -37,7 +37,9 @@
             </div>
         @endif
         <x-add-expense />
-        <table class="table">
+        @php $expensesCount = count( $expenses ); @endphp
+        <table class="table" data-row-count="{{ $expensesCount }}" >
+            <h1 class="expense-header">Latest Expense Records</h1>
             <thead>
             <tr>
                 <th>Description</th>

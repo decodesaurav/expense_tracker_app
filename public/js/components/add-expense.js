@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
     const form = document.getElementById('expense-addition');
     const addButton = form.querySelector('.btn-primary');
     const successMessageContainer = document.getElementById('added-expense-details');
+    const table = document.querySelector('.table');
+    let rowCount = parseInt(table.getAttribute('data-row-count'));
+
 
     addButton.addEventListener('click', function () {
         // Get the form data
@@ -15,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
         if (!formData.get('amount') || !formData.get('date') || !formData.get('description') || !formData.get('category')) {
             errorMessageContainer.innerHTML = 'Please provide all the data';
             errorMessageContainer.style.display = '';
-
             errorMessageContainer.style.setProperty('display', 'block' );
 
             // Automatically remove the error message after 3 seconds
@@ -25,16 +27,29 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
             return; // Exit the function if data is missing
         }
+
         // Send a POST request using Axios
         axios.post('/expenses', formData)
             .then(function (response) {
                 const expenseDetails = response.data.expense;
-                let expenseId = expenseDetails.id;
-                const newRow = createTableRow(expenseDetails);
-                const tableBody = document.getElementById('expense-table-body');
-                tableBody.appendChild(newRow);
 
-                //clears the current input field after successful addition
+                // Create a new row for the latest expense
+                const newRow = createTableRow(expenseDetails);
+
+                // Get the table body
+                const tableBody = document.getElementById('expense-table-body');
+                const rowCount = tableBody.getElementsByTagName('tr').length;
+
+                // Check if row count exceeds the limit of 10
+                if (rowCount >= 10) {
+                    // Remove the last row (oldest expense)
+                    tableBody.removeChild(tableBody.lastElementChild);
+                }
+
+                // Add the new row to the top
+                tableBody.insertBefore(newRow, tableBody.firstChild);
+
+                // Clear the form input fields
                 form.reset();
 
                 successMessageContainer.innerHTML = 'Expense added successfully: ' + expenseDetails.description;
@@ -119,7 +134,6 @@ function createTableRow(expense) {
     const newRow = document.createElement('tr');
     const updateRoute = `/expenses/${expense.id}`;
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    console.log(csrfToken)
     newRow.innerHTML = `
       <td>${expense.description}</td>
       <td>${expense.amount}</td>

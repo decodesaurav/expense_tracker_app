@@ -11,7 +11,7 @@ class ExpenseController extends Controller
 {
     public function index() {
         //First of all, fetch expenses from the database
-        $expenses = Expense::all();
+        $expenses = Expense::orderBy('created_at', 'desc')->take(10)->get(); // Fetch the latest 10 expenses
         $showForm = true;
         return view('expenses.index', compact('showForm','expenses'));
     }

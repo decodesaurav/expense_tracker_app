@@ -1,0 +1,36 @@
+.alert-success {
+    transition: opacity 2s ease; /* Set the transition duration to 2 seconds */
+    opacity: 1;
+    -webkit-transition: opacity 2s ease;
+    -moz-transition: opacity 2s ease;
+    -o-transition: opacity 2s ease;
+    transition: opacity 2s ease;
+}
+
+.deleted-expense-details {
+    display: none; /* Initially hide the element */
+    margin-top: 10px; /* Add some spacing */
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+}
+.added-expense-details {
+    display: none; /* Initially hide the element */
+    margin-top: 10px; /* Add some spacing */
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+}
+.error-expense-message {
+    display: none; /* Initially hide the element */
+    margin-top: 10px; /* Add some spacing */
+    padding: 10px;
+    background-color: #8B0000;
+    color: #ffffff;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+}

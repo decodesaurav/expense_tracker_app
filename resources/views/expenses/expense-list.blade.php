@@ -38,37 +38,60 @@
         <div class="form-container expense-list">
             <form action="{{ route('expenses.show') }}" method="GET" class="combined-form">
                 <!-- Search Bar -->
-                <div class="search-bar">
-                    <input type="text" name="search" placeholder="Search by description or category">
+                <div class="search-bar" style="display: block;">
+                    Search By Name:
+                    <input type="text" name="search" placeholder="Search by description or category"
+                           value="{{ old('search', $request->input('search')) }}">
                 </div>
                 <!-- Filter Options -->
-                <div class="filter-bar">
+                <div class="filter-bar" style="display: block;">
+                    Search Categories
                     <select name="filter">
                         <option value="">All Categories</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category }}">{{ $category }}</option>
+                            <option value="{{ $category }}"{{ old('filter', $request->input('filter')) === $category ? ' selected' : '' }}>
+                                {{$category}}
+                            </option>
                         @endforeach
                     </select>
                 </div>
 
-                <!-- Sorting Options -->
-                <div class="sorting-option">
-                    <select name="sort">
-                        <option value="date_asc">Date (Oldest First)</option>
-                        <option value="date_desc">Date (Newest First)</option>
-                        <option value="amount_asc">Amount (Low to High)</option>
-                        <option value="amount_desc">Amount (High to Low)</option>
-                        <!-- Add more sorting options if needed -->
+                <div class="sorting-option" style="display: block;">
+                    Sort By Date:
+                    <select name="sort" style="margin: 4px;">
+                        @foreach ($sortOptions as $value => $label)
+                            <option value="{{ $value }}"{{ old('sort', $request->input('sort')) === $value ? ' selected' : '' }}>
+                                {{ $label }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="custom-date-filter" style="display: block;">
+                        <label>
+                            <input type="checkbox" name="apply_custom_date_filter" value="1"
+                                {{ old('apply_custom_date_filter', $request->input('apply_custom_date_filter')) ? 'checked' : '' }}>
+                            Apply Custom Date Filter
+                        </label>
+                    </div>
+                </div>
+                <div class="sorting-option" style="display: block;">
+                    Sort By Order:
+                    <select name="sort-amount" style="margin: 4px;">
+                        @foreach ($sortAmount as $value => $label)
+                            <option value="{{ $value }}"{{ old('sort-amount', $request->input('sort-amount')) === $value ? ' selected' : '' }}>
+                                {{ $label }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
+
                 <!-- Date Range Filter -->
-                <div class="date-range">
-                    <label for="start_date">Start Date:</label>
+                <div class="date-range" style="display: none;">
+                    <label for="start_date" style="margin: 4px;">Start Date:</label>
                     <input type="date" name="start_date" id="start_date" class="date-input"
                            placeholder="Select start date"
                            value="{{ old('start_date', $request->input('start_date')) }}">
 
-                    <label for="end_date">End Date:</label>
+                    <label for="end_date" style="margin: 4px;">End Date:</label>
                     <input type="date" name="end_date" id="end_date" class="date-input"
                            placeholder="Select end date"
                            value="{{ old('end_date', $request->input('end_date')) }}">
@@ -142,77 +165,21 @@
             </div>
         </div>
     </div>
-    <script>
-        // Function to display the message
-        function displayMessage(message) {
-            const messageContainer = document.querySelector('.message-container');
-            console.log(messageContainer);
-
-            const warningIcon = '<span style="color: red; font-size: 16px;">&#9888;</span>';
-            const messageHTML = `<p>${warningIcon} ${message}</p>`;
-
-            messageContainer.innerHTML = messageHTML;
-
-            setTimeout(() => {
-                messageContainer.innerHTML = '';
-            }, 5000);
-        }
-
-        // Add an event listener to the form submit button
-        const submitButton = document.querySelector('.combined-form button[type="submit"]');
-        if (submitButton) {
-            submitButton.addEventListener('click', function (event) {
-                const searchInput = document.querySelector('.search-bar input[name="search"]').value;
-                const filterInput = document.querySelector('.filter-bar select[name="filter"]').value;
-                const startDateInput = document.querySelector('.date-range input[name="start_date"]').value;
-                const endDateInput = document.querySelector('.date-range input[name="end_date"]').value;
-
-                if ((!searchInput && !filterInput) && ! ( startDateInput && endDateInput ) ) {
-                    event.preventDefault();
-                    displayMessage('No search, filter criteria applied.');
-                }
-            });
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            flatpickr('#start_date', {
-                maxDate: 'today', // Set maximum date to today
-                dateFormat: 'Y-m-d', // Set desired date format
-                onChange: function(selectedDates) {
-                    endPicker.set('minDate', selectedDates[0]);
-                }
-            });
-
-            const endPicker = flatpickr('#end_date', {
-                maxDate: 'today',
-                dateFormat: 'Y-m-d',
-                defaultDate: '{{ old('end_date', $request->input('end_date')) }}'
-            });
-        });
-        // Preserve form values in local storage
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('.combined-form');
-
-            // On form submission
-            form.addEventListener('submit', function(event) {
-                const formElements = form.elements;
-                for (const element of formElements) {
-                    if (element.type !== 'submit') {
-                        localStorage.setItem(element.name, element.value);
-                    }
-                }
-            });
-
-            // Restore form values from local storage
-            const storedFormValues = localStorage.getItem('formValues');
-            if (storedFormValues) {
-                const formValues = JSON.parse(storedFormValues);
-                for (const [name, value] of Object.entries(formValues)) {
-                    const inputElement = form.querySelector(`[name="${name}"]`);
-                    if (inputElement) {
-                        inputElement.value = value;
-                    }
-                }
+@endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr('#start_date', {
+            maxDate: 'today', // Set maximum date to today
+            dateFormat: 'Y-m-d', // Set desired date format
+            onChange: function(selectedDates) {
+                endPicker.set('minDate', selectedDates[0]);
             }
         });
-    </script>
-@endsection
+
+        const endPicker = flatpickr('#end_date', {
+            maxDate: 'today',
+            dateFormat: 'Y-m-d',
+            defaultDate: "{{ old('end_date', $request->input('end_date')) }}"
+        });
+    });
+</script>

@@ -27,6 +27,20 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
             return; // Exit the function if data is missing
         }
+        var amountValue = formData.get('amount');
+        if( isNaN(parseFloat(amountValue))){
+            errorMessageContainer.innerHTML = 'Please enter valid amount';
+            errorMessageContainer.style.display = '';
+            errorMessageContainer.style.setProperty('display', 'block' );
+
+            // Automatically remove the error message after 3 seconds
+            setTimeout(function () {
+                errorMessageContainer.style.setProperty('display', 'none' );
+            }, 3000);
+
+            return; // Exit the function if data is NaN
+
+        }
 
         // Send a POST request using Axios
         axios.post('/expenses', formData)

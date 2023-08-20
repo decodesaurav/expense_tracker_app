@@ -14,7 +14,7 @@
 
 @section('content')
     <div class="container">
-        <h2 class="page-header">Expense List</h2>
+        <h2 class="page-header"></h2>
         <div id="deleted-expense-details" class="deleted-expense-details"></div>
         <div id="added-expense-details" class="added-expense-details"></div>
         <div id="error-expense-message" class="error-expense-message"></div>
@@ -37,7 +37,7 @@
             </div>
         @endif
         <x-add-expense />
-        @php $expensesCount = count( $expenses ); @endphp
+        @php $expensesCount = 10; @endphp
         <table class="table" data-row-count="{{ $expensesCount }}" >
             <h1 class="expense-header">Latest Expense Records</h1>
             <thead>

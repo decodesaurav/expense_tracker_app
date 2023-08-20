@@ -39,7 +39,7 @@ class ExpenseController extends Controller
         //Update the expense
         $expense->update($validatedData);
 
-        return redirect()->route('expenses.index')->with('success', 'Expense updated successfully');
+        return back()->with('success', 'Expense updated successfully');
     }
     public function destroy($id)
     {

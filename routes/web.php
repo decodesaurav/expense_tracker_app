@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExpenseDisplayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,6 @@ Route::post('/categories', [CategoryController::class, 'storeCategories'])->name
 Route::get('/expenses/{id}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
 Route::put('/expenses/{id}', [ExpenseController::class, 'update'])->name('expenses.update');
 Route::delete('/expenses/{id}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+
+//My Spendings Page
+Route::get('/expense-list', [ExpenseDisplayController::class, 'index'])->name('expenses.show');

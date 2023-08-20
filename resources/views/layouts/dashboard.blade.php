@@ -83,7 +83,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('expenses.index') }}">
-                                {{ __('Expenses') }}
+                                {{ __('Add Expense') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('expenses.show') }}">
+                                {{ __('My Expenses') }}
                             </a>
                         </li>
                         <!-- Add more sidebar navigation items if needed -->

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(e) {
+document.addEventListener('DOMContentLoaded', function (e) {
     let addNewCategoryLink = document.getElementById('add-new-category');
     let categoryForm = document.getElementById('new-category-field');
     const form = document.getElementById('expense-addition');
@@ -18,24 +18,24 @@ document.addEventListener('DOMContentLoaded', function(e) {
         if (!formData.get('amount') || !formData.get('date') || !formData.get('description') || !formData.get('category')) {
             errorMessageContainer.innerHTML = 'Please provide all the data';
             errorMessageContainer.style.display = '';
-            errorMessageContainer.style.setProperty('display', 'block' );
+            errorMessageContainer.style.setProperty('display', 'block');
 
             // Automatically remove the error message after 3 seconds
             setTimeout(function () {
-                errorMessageContainer.style.setProperty('display', 'none' );
+                errorMessageContainer.style.setProperty('display', 'none');
             }, 3000);
 
             return; // Exit the function if data is missing
         }
         var amountValue = formData.get('amount');
-        if( isNaN(parseFloat(amountValue))){
+        if (isNaN(parseFloat(amountValue))) {
             errorMessageContainer.innerHTML = 'Please enter valid amount';
             errorMessageContainer.style.display = '';
-            errorMessageContainer.style.setProperty('display', 'block' );
+            errorMessageContainer.style.setProperty('display', 'block');
 
             // Automatically remove the error message after 3 seconds
             setTimeout(function () {
-                errorMessageContainer.style.setProperty('display', 'none' );
+                errorMessageContainer.style.setProperty('display', 'none');
             }, 3000);
 
             return; // Exit the function if data is NaN
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     });
 
 
-    addNewCategoryLink.addEventListener('click', function(event) {
+    addNewCategoryLink.addEventListener('click', function (event) {
         event.preventDefault();
         categoryForm.style.display = 'block';
     });
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     //Edit buttons
     const editButtons = document.querySelectorAll('.edit-expense');
     editButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
+        button.addEventListener('click', function (event) {
             const expenseId = this.getAttribute('data-id');
             console.log(expenseId)
             const updateExpenseRoute = this.getAttribute('data-route');
@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
         });
     });
 });
+
 function createTableRow(expense) {
     const newRow = document.createElement('tr');
     const updateRoute = `/expenses/${expense.id}`;
@@ -168,6 +169,7 @@ function createTableRow(expense) {
 
     return newRow;
 }
+
 function handleDelete(event) {
     const expenseId = event.target.getAttribute('data-id');
     const deleteForm = document.getElementById(`delete-form-${expenseId}`);
@@ -193,6 +195,7 @@ function handleDelete(event) {
         successMessageContainer.style.display = 'none';
     }, 3000);
 }
+
 function getCurrentDate() {
     const today = new Date();
     const year = today.getFullYear();

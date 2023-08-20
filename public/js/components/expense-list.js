@@ -23,14 +23,14 @@ if (submitButton) {
         const endDateInput = document.querySelector('.date-range input[name="end_date"]').value;
         const sortFilterInput = document.querySelector('.date-range select[name="sort"]').value;
 
-        if ((!searchInput && !filterInput) && ! ( startDateInput && endDateInput ) && ! sortFilterInput ) {
+        if ((!searchInput && !filterInput) && !(startDateInput && endDateInput) && !sortFilterInput) {
             event.preventDefault();
             displayMessage('No search, filter criteria applied.');
         }
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const checkbox = document.querySelector('input[name="apply_custom_date_filter"]');
     const dateRange = document.querySelector('.date-range');
 
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Attach an event handler to the checkbox
-    checkbox.addEventListener('change', function() {
+    checkbox.addEventListener('change', function () {
         if (this.checked) {
             dateRange.style.display = "block";  // Show date range when checkbox is checked
         } else {

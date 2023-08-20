@@ -9,7 +9,8 @@
             <div class="col-md-4">
                 <div class="profile-picture">
                     <!-- Add profile picture here -->
-                    <img src="{{ asset('images/profile_picture.jpeg') }}" alt="Profile Picture" class="img-fluid rounded-circle">
+                    <img src="{{ asset('images/profile_picture.jpeg') }}" alt="Profile Picture"
+                         class="img-fluid rounded-circle">
                 </div>
             </div>
             <div class="col-md-8">

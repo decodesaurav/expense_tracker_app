@@ -33,7 +33,7 @@ class ExpenseDisplayController extends Controller
             'amount_asc' => 'amount',
             'amount_desc' => 'amount desc',
         ];
-        if ( array_key_exists($sort, $sortBy)) {
+        if (array_key_exists($sort, $sortBy)) {
             $query->orderByRaw($sortBy[$sort]);
         }
         if ($column === 'date') {
@@ -41,7 +41,7 @@ class ExpenseDisplayController extends Controller
         }
     }
 
-    private function applyCustomSorting($query,$sort): void
+    private function applyCustomSorting($query, $sort): void
     {
         $sortByOptions = [
             'yesterday' => Carbon::yesterday(),
@@ -57,7 +57,8 @@ class ExpenseDisplayController extends Controller
         }
     }
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $query = Expense::query(); //base query
         $categories = Category::distinct()->pluck('name');
 
@@ -76,15 +77,16 @@ class ExpenseDisplayController extends Controller
             }
             $this->applySorting($query, $sort, 'date');
         }
+
         //Apply Search Filter
-        if($request->has('search')){
-            $query->where(function ($query) use ($request){
-                $query->where('description','like','%' . $request->input('search') . '%')
+        if ($request->has('search')) {
+            $query->where(function ($query) use ($request) {
+                $query->where('description', 'like', '%' . $request->input('search') . '%')
                     ->orWhere('category', 'like', '%' . $request->input('search') . '%');
             });
         }
         //Apply Date filtering
-        if($request->has('start_date') && $request->has('end_date')) {
+        if ($request->has('start_date') && $request->has('end_date')) {
             $startDate = $request->input('start_date');
             $endDate = $request->input('end_date');
             $endDate = date('y-m-d', strtotime($endDate . '+1 day'));
@@ -93,8 +95,10 @@ class ExpenseDisplayController extends Controller
             }
         }
         $allExpenses = $query->orderBy('date', 'desc')->paginate($this->perPage);
-        $expense = ($allExpenses->isEmpty() && !$request->filled('search') && !$request->has('filter')) ? $query->paginate($this->perPage) : null;
-        return view('expenses.expense-list',[
+        $expense = ($allExpenses->isEmpty() && !$request->filled('search') && !$request->has(
+                'filter'
+            )) ? $query->paginate($this->perPage) : null;
+        return view('expenses.expense-list', [
             'sortedExpenses' => $expense ?? null,
             'expenses' => $allExpenses,
             'categories' => $categories,

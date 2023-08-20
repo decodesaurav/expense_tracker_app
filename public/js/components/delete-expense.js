@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
                             // Automatically remove the success message after 3 seconds
                             setTimeout(function () {
-                                successMessageContainer.style.setProperty('display', 'none' );
+                                successMessageContainer.style.setProperty('display', 'none');
                             }, 3000);
                         })
                         .catch(function (error) {

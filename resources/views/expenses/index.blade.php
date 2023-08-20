@@ -36,9 +36,9 @@
                 </ul>
             </div>
         @endif
-        <x-add-expense />
+        <x-add-expense/>
         @php $expensesCount = 10; @endphp
-        <table class="table" data-row-count="{{ $expensesCount }}" >
+        <table class="table" data-row-count="{{ $expensesCount }}">
             <h1 class="expense-header">Latest Expense Records</h1>
             <thead>
             <tr>
@@ -63,12 +63,14 @@
                                 data-toggle="modal"
                                 data-target="#editModal"
                                 data-csrf="{{ csrf_token() }}"
-                                >
+                        >
                             Edit
                         </button>
                         <form class="d-inline" id="delete-form-{{ $expense->id }}">
                             @csrf
-                            <button type="button" class="btn btn-danger delete-expense" data-id="{{ $expense->id }}">Delete</button>
+                            <button type="button" class="btn btn-danger delete-expense" data-id="{{ $expense->id }}">
+                                Delete
+                            </button>
                         </form>
                     </td>
                 </tr>

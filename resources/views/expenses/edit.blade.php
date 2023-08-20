@@ -16,44 +16,47 @@
                 <form action="{{ route('expenses.update', $expense->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="amount" >Amount</label>
-                                <input type="text" name="amount" id="amount" class="form-control"  value="{{ $expense->amount }}" required>
-                            </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="text" name="amount" id="amount" class="form-control"
+                                   value="{{ $expense->amount }}" required>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="date">Date</label>
-                                <input type="date" name="date" id="date" class="form-control"  value="{{ $expense->date }}" required>
-                            </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" name="date" id="date" class="form-control" value="{{ $expense->date }}"
+                                   required>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <input type="text" name="description" id="description" class="form-control" value="{{ $expense->description }}" required>
-                            </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" name="description" id="description" class="form-control"
+                                   value="{{ $expense->description }}" required>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="category">Category</label>
-                                @if (!empty($categories))
-                                    <select name="category" id="category" class="form-control" >
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->name }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div>
-                                        <a href="#" id="add-new-category">Add New Category</a>
-                                    </div>
-                                @endif
-                            </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            @if (!empty($categories))
+                                <select name="category" id="category" class="form-control">
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div>
+                                    <a href="#" id="add-new-category">Add New Category</a>
+                                </div>
+                            @endif
+                        </div>
 
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Update</button>
-                            <a href="{{ route('expenses.index') }}" class="btn btn-secondary">Cancel</a>
-                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Update</button>
+                        <a href="{{ route('expenses.index') }}" class="btn btn-secondary">Cancel</a>
+                    </div>
                 </form>
                 <form action="{{ route('categories.store') }}" method="POST" class="row g-2" id="category-form-field">
                     @csrf

@@ -6,6 +6,7 @@
     -o-transition: opacity 2s ease;
     transition: opacity 2s ease;
 }
+
 .error-expense-message,
 .added-expense-details,
 .deleted-expense-details {
@@ -17,12 +18,14 @@
     border: 1px solid #c3e6cb;
     border-radius: 4px;
 }
+
 .expense-header {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px;
 }
+
 .filter-bar select option,
 .sorting-option select option {
     color: #333;
@@ -39,12 +42,14 @@
     cursor: pointer;
     margin-left: 10px;
 }
+
 .filter-bar select,
 .sorting-option select {
     padding: 6px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 .search-bar {
     display: flex;
     align-items: center;
@@ -74,6 +79,7 @@
     align-items: center;
     margin-bottom: 20px;
 }
+
 /* Styling for forms container */
 .form-container {
     display: flex;
@@ -110,6 +116,7 @@
     cursor: pointer;
     margin-left: 10px;
 }
+
 .content-container {
     display: flex;
     flex-direction: column;
@@ -117,14 +124,17 @@
     max-width: 70vw;
     margin: 0 auto;
 }
+
 .search-bar,
 .filter-bar,
 .sorting-option {
     margin-right: 10px;
 }
+
 .apply-button {
     margin-left: 10px;
 }
+
 .message-container {
     color: red;
     display: inline-flex;
@@ -139,13 +149,16 @@
 .message .icon {
     font-size: 16px;
 }
+
 .pagination .page-link {
     font-size: 14px;
 }
+
 .pagination .page-link svg {
     width: 16px;
     height: 16px;
 }
+
 /* Style for the date range filter section */
 .date-range {
     display: flex;

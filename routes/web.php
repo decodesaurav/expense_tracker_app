@@ -23,7 +23,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth', 'role:editor,admin');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(
+    'auth',
+    'role:editor,admin'
+);
 
 //User Profile
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile')->middleware('auth');
@@ -37,7 +40,9 @@ Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.st
 //Category
 Route::get('/categories', [CategoryController::class, 'categories'])->name('categories.index');
 Route::get('/categories/create', [CategoryController::class, 'createCategories'])->name('categories.create');
-Route::post('/categories', [CategoryController::class, 'storeCategories'])->name('categories.store')->middleware('auth');
+Route::post('/categories', [CategoryController::class, 'storeCategories'])->name('categories.store')->middleware(
+    'auth'
+);
 
 //CRUD Expense
 Route::get('/expenses/{id}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');

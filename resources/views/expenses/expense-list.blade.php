@@ -1,4 +1,3 @@
-
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
@@ -49,7 +48,8 @@
                     <select name="filter">
                         <option value="">All Categories</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category }}"{{ old('filter', $request->input('filter')) === $category ? ' selected' : '' }}>
+                            <option
+                                value="{{ $category }}"{{ old('filter', $request->input('filter')) === $category ? ' selected' : '' }}>
                                 {{$category}}
                             </option>
                         @endforeach
@@ -60,7 +60,8 @@
                     Sort By Date:
                     <select name="sort" style="margin: 4px;">
                         @foreach ($sortOptions as $value => $label)
-                            <option value="{{ $value }}"{{ old('sort', $request->input('sort')) === $value ? ' selected' : '' }}>
+                            <option
+                                value="{{ $value }}"{{ old('sort', $request->input('sort')) === $value ? ' selected' : '' }}>
                                 {{ $label }}
                             </option>
                         @endforeach
@@ -77,7 +78,8 @@
                     Sort By Order:
                     <select name="sort-amount" style="margin: 4px;">
                         @foreach ($sortAmount as $value => $label)
-                            <option value="{{ $value }}"{{ old('sort-amount', $request->input('sort-amount')) === $value ? ' selected' : '' }}>
+                            <option
+                                value="{{ $value }}"{{ old('sort-amount', $request->input('sort-amount')) === $value ? ' selected' : '' }}>
                                 {{ $label }}
                             </option>
                         @endforeach
@@ -103,7 +105,7 @@
             </form>
             <div class="message-container"></div>
         </div>
-        <table class="table" >
+        <table class="table">
             <h1 class="expense-header">Expense Records</h1>
             <thead>
             <tr>
@@ -138,7 +140,9 @@
                             </button>
                             <form class="d-inline" id="delete-form-{{ $expense->id }}">
                                 @csrf
-                                <button type="button" class="btn btn-danger delete-expense" data-id="{{ $expense->id }}">Delete</button>
+                                <button type="button" class="btn btn-danger delete-expense"
+                                        data-id="{{ $expense->id }}">Delete
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -147,7 +151,7 @@
             </tbody>
         </table>
         <div class="pagination">
-                {{ $expenses->links('vendor.pagination.tailwind') }}
+            {{ $expenses->links('vendor.pagination.tailwind') }}
         </div>
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -167,11 +171,11 @@
     </div>
 @endsection
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         flatpickr('#start_date', {
             maxDate: 'today', // Set maximum date to today
             dateFormat: 'Y-m-d', // Set desired date format
-            onChange: function(selectedDates) {
+            onChange: function (selectedDates) {
                 endPicker.set('minDate', selectedDates[0]);
             }
         });

@@ -38,7 +38,7 @@ function appendCategory(responseData) {
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
-    document.getElementById('add-category-btn').addEventListener('click', function (event){
+    document.getElementById('add-category-btn').addEventListener('click', function (event) {
         event.preventDefault();
         const formData = new FormData(document.getElementById('category-form-field'));
         const errorMessageContainer = document.getElementById('error-message');
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
         //send AJAX POST request
         const url = "/categories";
-        axios.post( url,formData, {
+        axios.post(url, formData, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'multipart/form-data'
@@ -69,10 +69,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 }
                 newCategoryField.style.display = 'none';
             })
-            .catch(function (error){
+            .catch(function (error) {
                 if (error.response && error.response.status === 422) {
                     errorMessageContainer.textContent = 'The provided category is already present or not valid'; // Display the error message
-                } else if(error.response && error.response.status === 401) {
+                } else if (error.response && error.response.status === 401) {
                     errorMessageContainer.textContent = 'Please login or register'; // Display the error message
                 } else {
                     console.error('Error adding category:', error);

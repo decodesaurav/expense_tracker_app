@@ -21,7 +21,8 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="date">Date</label>
-                    <input type="date" name="date" id="date" class="form-control" required max="<?php echo date('Y-m-d'); ?>" >
+                    <input type="date" name="date" id="date" class="form-control" required
+                           max="<?php echo date('Y-m-d'); ?>">
                 </div>
             </div>
             <div class="col-md-3">
@@ -34,7 +35,7 @@
                 <div class="form-group" id="add-category-new">
                     <label for="category">Category</label>
                     @if (count($categories))
-                        <select name="category" id="category" class="form-control" >
+                        <select name="category" id="category" class="form-control">
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
@@ -43,12 +44,12 @@
                             <a href="#" id="add-new-category">Add New Category</a>
                         </div>
                     @else
-                        <select name="category" id="category" class="form-control" >
+                        <select name="category" id="category" class="form-control">
                             <option value="add-new">Add new category</option>
                         </select>
                         <div>
-                             <a href="#" class="no-category-present" id="add-new-category">Add New Category</a>
-                         </div>
+                            <a href="#" class="no-category-present" id="add-new-category">Add New Category</a>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -67,7 +68,9 @@
                     <div style="margin-top: 20px;"></div>
                     <div class="col-md-3">
                         <div class="col-12">
-                            <button type="button" id="add-category-btn" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Add</button>
+                            <button type="button" id="add-category-btn" class="btn btn-primary btn-block"><i
+                                    class="fa fa-plus"></i> Add
+                            </button>
                         </div>
                     </div>
                     <div id="error-message" class="text-danger"></div>

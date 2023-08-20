@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public  function show(){
+    public function show()
+    {
         //display the profile information
         $user = Auth::user();
 
@@ -17,7 +18,8 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function update( Request $request ){
+    public function update(Request $request)
+    {
         //validation first
         $request->validate([
             'name' => 'required|string|max:255',
@@ -31,6 +33,5 @@ class ProfileController extends Controller
 
         //redirect back to profile page
         return redirect()->route('profile')->with('success', 'Profile Updated Successfully');
-
     }
 }

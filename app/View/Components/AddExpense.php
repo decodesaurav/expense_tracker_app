@@ -25,6 +25,6 @@ class AddExpense extends Component
     public function render()
     {
         $categories = Category::all();
-        return view('components.add-expense',compact('categories'));
+        return view('components.add-expense', compact('categories'));
     }
 }

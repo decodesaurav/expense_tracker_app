@@ -1,14 +1,13 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('editModal');
-    if(modal) {
+    if (modal) {
         const modalBody = modal.querySelector('.modal-body');
         const expenseTableBody = document.getElementById('expense-table-body');
 
         expenseTableBody.addEventListener('click', (event) => {
             const editButton = event.target;
             console.log(editButton)
-            if(editButton.classList.contains('edit-expense')) {
+            if (editButton.classList.contains('edit-expense')) {
                 const expenseId = editButton.dataset.id;
                 const updateExpenseRoute = editButton.dataset.route;
                 const csrfToken = editButton.dataset.csrf;
@@ -68,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
 function getCurrentDate() {
     const today = new Date();
     const year = today.getFullYear();

@@ -31,7 +31,7 @@ class CategoryController extends Controller
 
         $lastCategory = Category::select('id', 'name')->latest()->first();
 
-        if($lastCategory){
+        if ($lastCategory) {
             return $lastCategory;
         } else {
             return ('Category Not found');

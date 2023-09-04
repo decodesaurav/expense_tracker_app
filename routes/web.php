@@ -1,10 +1,15 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseDisplayController;
+use App\Http\Controllers\dashboard\DashboardExpenseController;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +23,14 @@ use App\Http\Controllers\ExpenseDisplayController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(
-    'auth',
-    'role:editor,admin'
+Route::get('/home', [DashboardExpenseController::class, 'index'])->name('home')->middleware(
+	'auth',
+	'role:editor,admin'
 );
 
 //User Profile
@@ -41,7 +46,7 @@ Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.st
 Route::get('/categories', [CategoryController::class, 'categories'])->name('categories.index');
 Route::get('/categories/create', [CategoryController::class, 'createCategories'])->name('categories.create');
 Route::post('/categories', [CategoryController::class, 'storeCategories'])->name('categories.store')->middleware(
-    'auth'
+	'auth'
 );
 
 //CRUD Expense
@@ -51,3 +56,6 @@ Route::delete('/expenses/{id}', [ExpenseController::class, 'destroy'])->name('ex
 
 //My Spendings Page
 Route::get('/expense-list', [ExpenseDisplayController::class, 'index'])->name('expenses.show');
+
+//Dashboard
+Route::get('/dashboard', [DashboardExpenseController::class, 'index'])->name('dashboard.totalexpense');

@@ -38,27 +38,30 @@ Route::get('/profile', [ProfileController::class, 'show'])->name('profile')->mid
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
 //Expenses CRUD
-Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses.index');
-Route::get('/expenses/create', [ExpenseController::class, 'create'])->name('expenses.create');
-Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
+Route::middleware(['auth'])->group(function () {
 
-//Category
-Route::get('/categories', [CategoryController::class, 'categories'])->name('categories.index');
-Route::get('/categories/create', [CategoryController::class, 'createCategories'])->name('categories.create');
-Route::post('/categories', [CategoryController::class, 'storeCategories'])->name('categories.store')->middleware(
-	'auth'
-);
+	Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses.index');
+	Route::get('/expenses/create', [ExpenseController::class, 'create'])->name('expenses.create');
+	Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
 
-//CRUD Expense
-Route::get('/expenses/{id}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
-Route::put('/expenses/{id}', [ExpenseController::class, 'update'])->name('expenses.update');
-Route::delete('/expenses/{id}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+	//Category
+	Route::get('/categories', [CategoryController::class, 'categories'])->name('categories.index');
+	Route::get('/categories/create', [CategoryController::class, 'createCategories'])->name('categories.create');
+	Route::post('/categories', [CategoryController::class, 'storeCategories'])->name('categories.store')->middleware(
+		'auth'
+	);
 
-//My Spendings Page
-Route::get('/expense-list', [ExpenseDisplayController::class, 'index'])->name('expenses.show');
+	//CRUD Expense
+	Route::get('/expenses/{id}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
+	Route::put('/expenses/{id}', [ExpenseController::class, 'update'])->name('expenses.update');
+	Route::delete('/expenses/{id}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
 
-//Dashboard
-Route::get('/dashboard', [DashboardExpenseController::class, 'index'])->name('dashboard.totalexpense');
-Route::get('/dashboard/{selectedTime}', [DashboardExpenseController::class, 'filter'])->name('dashboard.filterPrice');
-Route::get('/dashboard/category/{selectedCategory}', [DashboardExpenseController::class, 'filterByCategory'])->name('dashboard.filterPriceByCategory');
-Route::get('/get-expense-data', [DashboardExpenseController::class, 'getExpenseByCategory'])->name('dashboard.getExpenseByCategory');
+	//My Spendings Page
+	Route::get('/expense-list', [ExpenseDisplayController::class, 'index'])->name('expenses.show');
+
+	//Dashboard
+	Route::get('/dashboard', [DashboardExpenseController::class, 'index'])->name('dashboard.totalexpense');
+	Route::get('/dashboard/{selectedTime}', [DashboardExpenseController::class, 'filter'])->name('dashboard.filterPrice');
+	Route::get('/dashboard/category/{selectedCategory}', [DashboardExpenseController::class, 'filterByCategory'])->name('dashboard.filterPriceByCategory');
+	Route::get('/get-expense-data', [DashboardExpenseController::class, 'getExpenseByCategory'])->name('dashboard.getExpenseByCategory');
+});

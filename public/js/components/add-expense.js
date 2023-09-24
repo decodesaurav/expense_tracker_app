@@ -82,10 +82,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
     });
 
 
-    addNewCategoryLink.addEventListener('click', function (event) {
-        event.preventDefault();
-        categoryForm.style.display = 'block';
-    });
+    // addNewCategoryLink.addEventListener('click', function (event) {
+    //     event.preventDefault();
+    //     categoryForm.style.display = 'block';
+    // });
 
     //date fetch current date
     const dateInput = document.getElementById('date');

@@ -40,9 +40,6 @@
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
-                        <div>
-                            <a href="#" id="add-new-category">Add New Category</a>
-                        </div>
                     @else
                         <select name="category" id="category" class="form-control">
                             <option value="add-new">Add new category</option>

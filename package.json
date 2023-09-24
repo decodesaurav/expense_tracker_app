@@ -83,6 +83,7 @@
         "caniuse-lite": "^1.0.30001519",
         "chalk": "^4.1.2",
         "charenc": "^0.0.2",
+        "chartjs-adapter-date-fns": "^3.0.0",
         "chokidar": "^3.5.3",
         "chrome-trace-event": "^1.0.3",
         "cipher-base": "^1.0.4",

@@ -59,3 +59,6 @@ Route::get('/expense-list', [ExpenseDisplayController::class, 'index'])->name('e
 
 //Dashboard
 Route::get('/dashboard', [DashboardExpenseController::class, 'index'])->name('dashboard.totalexpense');
+Route::get('/dashboard/{selectedTime}', [DashboardExpenseController::class, 'filter'])->name('dashboard.filterPrice');
+Route::get('/dashboard/category/{selectedCategory}', [DashboardExpenseController::class, 'filterByCategory'])->name('dashboard.filterPriceByCategory');
+Route::get('/get-expense-data', [DashboardExpenseController::class, 'getExpenseByCategory'])->name('dashboard.getExpenseByCategory');
